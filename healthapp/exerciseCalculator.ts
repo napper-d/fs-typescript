@@ -1,3 +1,8 @@
+interface exerciseData {
+  exerciseHours: number[];
+  targetHours: number;
+}
+
 const CalculateExercises = (exercise_hours : number[], target_hours: number) => {
   let period_length = exercise_hours.length;
   let training_days = exercise_hours.reduce((acc, cur) => acc + (cur > 0 ? 1 : 0), 0);
@@ -24,11 +29,27 @@ const CalculateExercises = (exercise_hours : number[], target_hours: number) => 
   }
 }
 
-const test = {
-  exerciseHours: [3, 0, 2, 4.5, 0, 3, 1],
-  targetHours: 2,
+const parseArguments = (args: string[]): exerciseData => {
+   if (args.length < 4) {
+     throw new Error('Not enough arguments!');
+   }
+   const targetHours = Number(args[2]);
+   const exerciseHours = args.slice(3).map(Number);
+   if (isNaN(targetHours) || exerciseHours.some((h) => isNaN(h))) {
+     throw new Error('Provided values were not numbers!');
+   }
+   return { targetHours, exerciseHours };
 }
 
-console.log(CalculateExercises(test.exerciseHours, test.targetHours));
+try {
+  const {targetHours, exerciseHours} = parseArguments(process.argv);
+  console.log(CalculateExercises(exerciseHours, targetHours));
+} catch (error: unknown) {
+  let errorMessage = 'Something bad happened.'
+  if (error instanceof Error) {
+    errorMessage += ' Error: ' + error.message;
+  }
+  console.log(errorMessage);
+}
 
 export default CalculateExercises;
