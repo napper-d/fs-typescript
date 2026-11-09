@@ -3,7 +3,7 @@ import type { Diagnose } from '../types.ts';
 
 const diagnoses: Diagnose[] = diagnoseData;
 
-const getEntries = (): Diagnose[] => {
+const getDiagnoses = (): Diagnose[] => {
   return diagnoses;
 };
 
@@ -12,6 +12,6 @@ const addDiagnose = () => {
 };
 
 export default {
-  getEntries,
+  getDiagnoses,
   addDiagnose
 };
