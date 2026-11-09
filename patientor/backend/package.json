@@ -3,8 +3,8 @@
   "main": "index.ts",
   "scripts": {
     "tsc": "tsc",
-    "start": "tsc && node index.ts",
-    "dev": "concurrently \"tsc --watch\" \"node --watch --experimental-transform-types index.ts\"",
+    "start": "tsc && node src/index.ts",
+    "dev": "concurrently \"tsc --watch\" \"node --watch --experimental-transform-types src/index.ts\"",
     "lint": "eslint ."
   },
   "devDependencies": {
